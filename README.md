@@ -1,10 +1,3 @@
-ℹ️ Repository Information
-
-Project Name: Operation Support System
-
-Repository URL: https://github.com/xiaolingwang1999-commits/Operation-Support-System
-
-
 😊 How to Run This Project
 
 
