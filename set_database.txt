@@ -1,0 +1,99 @@
+sql
+-- Create database
+CREATE DATABASE operation_support_system;
+-- Connect to the database
+\c operation_support_system;
+-- Create tables with foreign key constraints
+CREATE TABLE organizationdepartment (
+    orgdeptid INTEGER NOT NULL PRIMARY KEY,
+    orgname VARCHAR,
+    depname VARCHAR
+);
+CREATE TABLE types (
+    typeid INTEGER NOT NULL PRIMARY KEY,
+    typename VARCHAR,
+    isvalid BOOLEAN
+);
+CREATE TABLE users (
+    userid INTEGER NOT NULL PRIMARY KEY,
+    useremail VARCHAR,
+    userpassword VARCHAR,
+    username VARCHAR,
+    orgdeptid INTEGER,
+    typeid INTEGER,
+    FOREIGN KEY (orgdeptid) REFERENCES organizationdepartment(orgdeptid),
+    FOREIGN KEY (typeid) REFERENCES types(typeid)
+);
+
+CREATE TABLE knowledgeoverviews (
+    knowlid INTEGER NOT NULL PRIMARY KEY,
+    userid INTEGER,
+    typeid INTEGER,
+    knowltitle VARCHAR,
+    versionnum INTEGER,
+    FOREIGN KEY (userid) REFERENCES users(userid),
+    FOREIGN KEY (typeid) REFERENCES types(typeid)
+);
+
+CREATE TABLE knowledgecontents (
+    knowlid INTEGER,
+    partnum INTEGER,
+    title VARCHAR,
+    content VARCHAR,
+    FOREIGN KEY (knowlid) REFERENCES knowledgeoverviews(knowlid),
+    PRIMARY KEY (knowlid, partnum)
+);
+
+CREATE TABLE projectsoverviews (
+    projid INTEGER NOT NULL PRIMARY KEY,
+    knowlid INTEGER,
+    projtitle VARCHAR,
+    begintime DATE,
+    predictfinishtime DATE,
+    actualfinishtime DATE,
+    FOREIGN KEY (knowlid) REFERENCES knowledgeoverviews(knowlid)
+);
+
+CREATE TABLE projectscontents (
+    projid INTEGER,
+    step INTEGER,
+    title VARCHAR,
+    userid INTEGER,
+    begintime DATE,
+    predictfinishtime DATE,
+    actualfinishtime DATE,
+    completionrate DECIMAL(5,2),
+    remark VARCHAR,
+    FOREIGN KEY (projid) REFERENCES projectsoverviews(projid),
+    FOREIGN KEY (userid) REFERENCES users(userid),
+    PRIMARY KEY (projid, step)
+);
+
+CREATE TABLE problemsoverview (
+    probid INTEGER NOT NULL PRIMARY KEY,
+    knowlid INTEGER,
+    userid INTEGER,
+    ispublic BOOLEAN,
+    recordtime DATE,
+    typeid INTEGER,
+    probtitle VARCHAR,
+    FOREIGN KEY (knowlid) REFERENCES knowledgeoverviews(knowlid),
+    FOREIGN KEY (userid) REFERENCES users(userid),
+    FOREIGN KEY (typeid) REFERENCES types(typeid)
+);
+
+CREATE TABLE problemscontents (
+    probid INTEGER,
+    partnum INTEGER,
+    knowlid INTEGER,
+    orgdeptid INTEGER,
+    userid INTEGER,
+    content VARCHAR,
+    typeid INTEGER,
+    FOREIGN KEY (probid) REFERENCES problemsoverview(probid),
+    FOREIGN KEY (knowlid) REFERENCES knowledgeoverviews(knowlid),
+    FOREIGN KEY (orgdeptid) REFERENCES organizationdepartment(orgdeptid),
+    FOREIGN KEY (userid) REFERENCES users(userid),
+    FOREIGN KEY (typeid) REFERENCES types(typeid),
+    PRIMARY KEY (probid, partnum)
+);
