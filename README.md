@@ -8,7 +8,7 @@ Repository URL: https://github.com/xiaolingwang1999-commits/Operation-Support-Sy
 😊 How to Run This Project
 
 
-Prerequisites👀
+1. Prerequisites👀
 
 Python 3.8 or higher
 
@@ -20,37 +20,37 @@ Git installed on your system
 
 
 
-Clone the Repository 🚩
+2. Clone the Repository 🚩
 
 git clone https://github.com/xiaolingwang1999-commits/Operation-Support-System.git
 
 cd Operation-Support-System
 
 
-Set Up PostgreSQL Database 📚
+3. Set Up PostgreSQL Database 📚
 
 Before running the application, you need to set up the PostgreSQL database using the SQL commands in set_database.txt.
 
 
-Download the Language Model 🤖 
+4. Download the Language Model 🤖 
 
 Visit: https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF
 
 Download the llama-2-7b-chat.Q4_K_M.gguf model file
 
 
-Organize Model Files ✍
+5. Organize Model Files ✍
 
 Create the following directory structure in your project root:
 
 models/TheBloke/llama-2-7b-chat.Q4_K_M.gguf
     
 
-Install required dependencies in Visual Studio Code 👇
+6. Install required dependencies in Visual Studio Code 👇
 
 pip install -r requirements.txt
 
 
-Run the Application 🎯
+7. Run the Application 🎯
 
 streamlit run run.py
