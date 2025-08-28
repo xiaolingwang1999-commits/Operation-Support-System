@@ -19,8 +19,6 @@ Visual Studio Code
 Git installed on your system
 
 
-Application Setup Instructions💻⚡
-
 
 Clone the Repository 🚩
 
@@ -45,11 +43,7 @@ Organize Model Files ✍
 
 Create the following directory structure in your project root:
 
-models/
-
-└── TheBloke/
-
-    └── llama-2-7b-chat.Q4_K_M.gguf
+models/TheBloke/llama-2-7b-chat.Q4_K_M.gguf
     
 
 Install required dependencies in Visual Studio Code 👇
